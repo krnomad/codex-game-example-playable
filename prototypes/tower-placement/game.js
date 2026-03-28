@@ -24,6 +24,15 @@ const IMAGE_PATHS = {
     falcon_fan: 'assets/relics/falcon-fan.svg',
     guild_medal: 'assets/relics/guild-medal.svg',
   },
+  enemies: {
+    goblin: 'assets/enemies/goblin-raider.svg',
+    wolf: 'assets/enemies/moonfang-wolf.svg',
+    ghost: 'assets/enemies/restless-spirit.svg',
+    bat: 'assets/enemies/night-bat.svg',
+    ogre: 'assets/enemies/ogre-brute.svg',
+    shaman: 'assets/enemies/shaman-caller.svg',
+    boss: 'assets/enemies/crimson-warlord.svg',
+  },
 };
 
 const images = {
@@ -31,6 +40,7 @@ const images = {
   heroes: {},
   leaders: {},
   relics: {},
+  enemies: {},
 };
 
 const audioState = {
@@ -112,6 +122,21 @@ function drawPixelSprite(cx, cy, pixels, scale) {
       }
     }
   }
+}
+
+function roundedRectPath(x, y, w, h, r) {
+  const radius = Math.max(0, Math.min(r, w / 2, h / 2));
+  ctx.beginPath();
+  ctx.moveTo(x + radius, y);
+  ctx.lineTo(x + w - radius, y);
+  ctx.quadraticCurveTo(x + w, y, x + w, y + radius);
+  ctx.lineTo(x + w, y + h - radius);
+  ctx.quadraticCurveTo(x + w, y + h, x + w - radius, y + h);
+  ctx.lineTo(x + radius, y + h);
+  ctx.quadraticCurveTo(x, y + h, x, y + h - radius);
+  ctx.lineTo(x, y + radius);
+  ctx.quadraticCurveTo(x, y, x + radius, y);
+  ctx.closePath();
 }
 
 // ── Pixel Sprite Data ──
@@ -651,13 +676,13 @@ const WAVES = [
 
 // ── Enemy Types ──
 const ENEMY_TYPES = {
-  goblin:  { name: '도깨비', hp: 45,  speed: 1.3, reward: 8,  color: '#55aa55', size: 12, sprite: 'goblin', flying: false },
-  wolf:    { name: '산짐승', hp: 65,  speed: 2.0, reward: 12, color: '#aa8866', size: 13, sprite: 'wolf', flying: false },
-  ghost:   { name: '원귀',   hp: 55,  speed: 1.1, reward: 15, color: '#aabbdd', size: 12, sprite: 'ghost', flying: false, phase: true },
-  bat:     { name: '박쥐',   hp: 30,  speed: 2.5, reward: 10, color: '#996699', size: 10, sprite: 'bat', flying: true },
-  ogre:    { name: '오우거', hp: 250, speed: 0.7, reward: 30, color: '#cc4444', size: 16, sprite: 'ogre', flying: false, armor: 3 },
-  shaman:  { name: '요술사', hp: 80,  speed: 0.9, reward: 25, color: '#00aa88', size: 13, sprite: 'shaman', flying: false, healer: true },
-  boss:    { name: '대요괴', hp: 800, speed: 0.5, reward: 120, color: '#ff2244', size: 22, sprite: 'boss', flying: false, armor: 5 },
+  goblin:  { name: '도깨비', hp: 45,  speed: 1.3, reward: 8,  color: '#55aa55', size: 12, sprite: 'goblin', art: IMAGE_PATHS.enemies.goblin, flying: false },
+  wolf:    { name: '산짐승', hp: 65,  speed: 2.0, reward: 12, color: '#aa8866', size: 13, sprite: 'wolf', art: IMAGE_PATHS.enemies.wolf, flying: false },
+  ghost:   { name: '원귀',   hp: 55,  speed: 1.1, reward: 15, color: '#aabbdd', size: 12, sprite: 'ghost', art: IMAGE_PATHS.enemies.ghost, flying: false, phase: true },
+  bat:     { name: '박쥐',   hp: 30,  speed: 2.5, reward: 10, color: '#996699', size: 10, sprite: 'bat', art: IMAGE_PATHS.enemies.bat, flying: true },
+  ogre:    { name: '오우거', hp: 250, speed: 0.7, reward: 30, color: '#cc4444', size: 16, sprite: 'ogre', art: IMAGE_PATHS.enemies.ogre, flying: false, armor: 3 },
+  shaman:  { name: '요술사', hp: 80,  speed: 0.9, reward: 25, color: '#00aa88', size: 13, sprite: 'shaman', art: IMAGE_PATHS.enemies.shaman, flying: false, healer: true },
+  boss:    { name: '대요괴', hp: 800, speed: 0.5, reward: 120, color: '#ff2244', size: 22, sprite: 'boss', art: IMAGE_PATHS.enemies.boss, flying: false, armor: 5 },
 };
 
 // ── Skill bar DOM cache ──
@@ -1039,6 +1064,9 @@ async function preloadArt() {
   }));
   await Promise.all(Object.entries(IMAGE_PATHS.relics).map(async ([key, path]) => {
     images.relics[key] = await loadImage(path);
+  }));
+  await Promise.all(Object.entries(IMAGE_PATHS.enemies).map(async ([key, path]) => {
+    images.enemies[key] = await loadImage(path);
   }));
 }
 
@@ -2621,6 +2649,18 @@ function drawBackground() {
   ctx.fillStyle = beam;
   ctx.fillRect(0, 0, W, H);
 
+  const villageGlow = ctx.createRadialGradient(908, 250, 40, 908, 250, 160);
+  villageGlow.addColorStop(0, 'rgba(255, 214, 148, 0.18)');
+  villageGlow.addColorStop(1, 'rgba(255, 214, 148, 0)');
+  ctx.fillStyle = villageGlow;
+  ctx.fillRect(760, 120, 240, 240);
+
+  const topMist = ctx.createLinearGradient(0, 0, 0, 180);
+  topMist.addColorStop(0, 'rgba(7, 12, 22, 0.35)');
+  topMist.addColorStop(1, 'rgba(7, 12, 22, 0)');
+  ctx.fillStyle = topMist;
+  ctx.fillRect(0, 0, W, 180);
+
   if (state.phase === 'combat') {
     ctx.fillStyle = 'rgba(255, 90, 56, 0.04)';
     ctx.fillRect(0, 0, W, H);
@@ -2629,9 +2669,72 @@ function drawBackground() {
 
 function drawEnvironment() {
   state.environmentObjects.forEach(obj => {
-    const sprite = SPRITES[obj.type];
-    if (sprite) {
-      drawPixelSprite(obj.x, obj.y, sprite, obj.scale);
+    if (obj.type === 'tree') {
+      ctx.fillStyle = 'rgba(0,0,0,0.12)';
+      ctx.beginPath();
+      ctx.ellipse(obj.x, obj.y + obj.scale * 5, obj.scale * 8, obj.scale * 3.5, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      const crown = ctx.createRadialGradient(obj.x, obj.y - obj.scale * 2, 4, obj.x, obj.y - obj.scale * 2, obj.scale * 14);
+      crown.addColorStop(0, 'rgba(125, 173, 110, 0.9)');
+      crown.addColorStop(1, 'rgba(34, 68, 38, 0.92)');
+      ctx.fillStyle = crown;
+      ctx.beginPath();
+      ctx.arc(obj.x, obj.y - obj.scale * 5, obj.scale * 6.5, 0, Math.PI * 2);
+      ctx.arc(obj.x - obj.scale * 4, obj.y + obj.scale * 1.5, obj.scale * 4.4, 0, Math.PI * 2);
+      ctx.arc(obj.x + obj.scale * 4.4, obj.y + obj.scale * 1.8, obj.scale * 4.8, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = '#4c3020';
+      roundedRectPath(obj.x - obj.scale * 1.4, obj.y + obj.scale * 2, obj.scale * 2.8, obj.scale * 8, obj.scale * 1.1);
+      ctx.fill();
+      return;
+    }
+
+    if (obj.type === 'rock') {
+      ctx.fillStyle = 'rgba(0,0,0,0.14)';
+      ctx.beginPath();
+      ctx.ellipse(obj.x, obj.y + obj.scale * 2.4, obj.scale * 6.4, obj.scale * 2.5, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = '#5a646d';
+      ctx.beginPath();
+      ctx.moveTo(obj.x - obj.scale * 6, obj.y + obj.scale * 2);
+      ctx.lineTo(obj.x - obj.scale * 2, obj.y - obj.scale * 5);
+      ctx.lineTo(obj.x + obj.scale * 5, obj.y - obj.scale * 2);
+      ctx.lineTo(obj.x + obj.scale * 6, obj.y + obj.scale * 4);
+      ctx.lineTo(obj.x - obj.scale * 3, obj.y + obj.scale * 5);
+      ctx.closePath();
+      ctx.fill();
+
+      ctx.strokeStyle = 'rgba(220, 235, 255, 0.12)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(obj.x - obj.scale * 1.5, obj.y - obj.scale * 3);
+      ctx.lineTo(obj.x + obj.scale * 3.2, obj.y + obj.scale * 2.8);
+      ctx.stroke();
+      return;
+    }
+
+    if (obj.type === 'house') {
+      ctx.fillStyle = 'rgba(0,0,0,0.18)';
+      ctx.beginPath();
+      ctx.ellipse(obj.x, obj.y + obj.scale * 5.5, obj.scale * 8, obj.scale * 3.2, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = '#523526';
+      roundedRectPath(obj.x - obj.scale * 5.6, obj.y - obj.scale * 3.2, obj.scale * 11.2, obj.scale * 10.6, obj.scale * 1.4);
+      ctx.fill();
+      ctx.fillStyle = '#b44935';
+      ctx.beginPath();
+      ctx.moveTo(obj.x - obj.scale * 7, obj.y - obj.scale * 1);
+      ctx.lineTo(obj.x, obj.y - obj.scale * 8);
+      ctx.lineTo(obj.x + obj.scale * 7, obj.y - obj.scale * 1);
+      ctx.closePath();
+      ctx.fill();
+      ctx.fillStyle = 'rgba(250, 223, 162, 0.45)';
+      roundedRectPath(obj.x - obj.scale * 1.6, obj.y + obj.scale * 1.5, obj.scale * 3.2, obj.scale * 4.8, obj.scale * 0.6);
+      ctx.fill();
     }
   });
 }
@@ -2651,23 +2754,33 @@ function drawPath() {
   ctx.lineJoin = 'round';
   const combatPulse = state.phase === 'combat' ? (0.18 + Math.sin(state.gameTime * 4.5) * 0.06) : 0.08;
 
-  ctx.strokeStyle = '#3a2a1a';
-  ctx.lineWidth = 42;
+  ctx.strokeStyle = 'rgba(17, 12, 10, 0.46)';
+  ctx.lineWidth = 48;
   ctx.beginPath();
   ctx.moveTo(PATH[0].x, PATH[0].y);
   for (let i = 1; i < PATH.length; i++) ctx.lineTo(PATH[i].x, PATH[i].y);
   ctx.stroke();
 
-  ctx.strokeStyle = '#5a4a3a';
-  ctx.lineWidth = 36;
+  const roadGrad = ctx.createLinearGradient(0, 110, 0, 430);
+  roadGrad.addColorStop(0, '#4f4334');
+  roadGrad.addColorStop(1, '#281d18');
+  ctx.strokeStyle = roadGrad;
+  ctx.lineWidth = 38;
   ctx.beginPath();
   ctx.moveTo(PATH[0].x, PATH[0].y);
   for (let i = 1; i < PATH.length; i++) ctx.lineTo(PATH[i].x, PATH[i].y);
   ctx.stroke();
 
-  ctx.strokeStyle = '#6b5a4a';
-  ctx.lineWidth = 2;
-  ctx.setLineDash([8, 12]);
+  ctx.strokeStyle = 'rgba(255, 233, 191, 0.08)';
+  ctx.lineWidth = 20;
+  ctx.beginPath();
+  ctx.moveTo(PATH[0].x, PATH[0].y);
+  for (let i = 1; i < PATH.length; i++) ctx.lineTo(PATH[i].x, PATH[i].y);
+  ctx.stroke();
+
+  ctx.strokeStyle = '#8f775b';
+  ctx.lineWidth = 2.5;
+  ctx.setLineDash([10, 14]);
   ctx.beginPath();
   ctx.moveTo(PATH[0].x, PATH[0].y);
   for (let i = 1; i < PATH.length; i++) ctx.lineTo(PATH[i].x, PATH[i].y);
@@ -2676,7 +2789,7 @@ function drawPath() {
 
   if (state.phase === 'combat') {
     ctx.strokeStyle = `rgba(255, 201, 111, ${combatPulse})`;
-    ctx.lineWidth = 10;
+    ctx.lineWidth = 11;
     ctx.setLineDash([18, 30]);
     ctx.lineDashOffset = -state.gameTime * 120;
     ctx.beginPath();
@@ -2701,6 +2814,21 @@ function drawPath() {
     ctx.fill();
     ctx.restore();
   }
+
+  PATH.forEach((point, index) => {
+    if (index === 0 || index === PATH.length - 1) return;
+    const pulse = 0.55 + Math.sin(state.gameTime * 3 + index) * 0.18;
+    ctx.fillStyle = 'rgba(25, 20, 14, 0.6)';
+    roundedRectPath(point.x - 8, point.y - 32, 16, 24, 4);
+    ctx.fill();
+    ctx.fillStyle = `rgba(255, 209, 122, ${0.18 + pulse * 0.14})`;
+    roundedRectPath(point.x - 4, point.y - 28, 8, 12, 3);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(point.x, point.y - 21, 10 + pulse * 3, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(255, 209, 122, ${0.04 + pulse * 0.05})`;
+    ctx.fill();
+  });
 }
 
 function drawSlots() {
@@ -2712,21 +2840,29 @@ function drawSlots() {
     const pulse = 0.55 + Math.sin(state.gameTime * 3.5 + i * 0.7) * 0.2;
 
     ctx.beginPath();
-    ctx.arc(slot.x, slot.y, 24, 0, Math.PI * 2);
-    ctx.fillStyle = isHover && hover ? `rgba(231,196,123,${0.28 + pulse * 0.12})` : `rgba(32,36,46,${0.38 + pulse * 0.08})`;
+    ctx.ellipse(slot.x, slot.y + 25, 28, 10, 0, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(0,0,0,0.22)';
     ctx.fill();
 
     ctx.beginPath();
-    ctx.arc(slot.x, slot.y, 29 + pulse * 2, 0, Math.PI * 2);
-    ctx.strokeStyle = `rgba(157, 192, 255, ${0.08 + pulse * 0.08})`;
+    ctx.arc(slot.x, slot.y + 4, 24, 0, Math.PI * 2);
+    const slotGrad = ctx.createRadialGradient(slot.x, slot.y - 4, 8, slot.x, slot.y + 4, 28);
+    slotGrad.addColorStop(0, slot.terrain === 'high' ? 'rgba(167, 210, 255, 0.52)' : 'rgba(255, 226, 165, 0.34)');
+    slotGrad.addColorStop(1, 'rgba(18, 22, 32, 0.92)');
+    ctx.fillStyle = isHover && hover ? `rgba(231,196,123,${0.28 + pulse * 0.12})` : slotGrad;
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.arc(slot.x, slot.y + 4, 30 + pulse * 2, 0, Math.PI * 2);
+    ctx.strokeStyle = `rgba(157, 192, 255, ${0.1 + pulse * 0.1})`;
     ctx.lineWidth = 1;
     ctx.stroke();
 
     if (slot.terrain === 'high') {
-      ctx.strokeStyle = '#8b7355';
+      ctx.strokeStyle = '#85b7ec';
       ctx.lineWidth = 2;
       ctx.stroke();
-      ctx.fillStyle = 'rgba(200,169,110,0.08)';
+      ctx.fillStyle = 'rgba(135, 189, 255, 0.12)';
       ctx.fill();
     }
 
@@ -2734,20 +2870,28 @@ function drawSlots() {
     ctx.lineWidth = 1.5;
     ctx.setLineDash([4, 4]);
     ctx.beginPath();
-    ctx.arc(slot.x, slot.y, 24, 0, Math.PI * 2);
+    ctx.arc(slot.x, slot.y + 4, 24, 0, Math.PI * 2);
     ctx.stroke();
     ctx.setLineDash([]);
+
+    ctx.fillStyle = 'rgba(11, 14, 22, 0.74)';
+    roundedRectPath(slot.x - 10, slot.y - 12, 20, 24, 8);
+    ctx.fill();
+    ctx.strokeStyle = slot.terrain === 'high' ? 'rgba(143, 196, 255, 0.45)' : 'rgba(255, 223, 166, 0.28)';
+    ctx.lineWidth = 1;
+    roundedRectPath(slot.x - 10, slot.y - 12, 20, 24, 8);
+    ctx.stroke();
 
     ctx.fillStyle = isHover && hover ? '#ffd700' : '#6b5344';
     ctx.font = 'bold 18px monospace';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.fillText('+', slot.x, slot.y);
+    ctx.fillText('+', slot.x, slot.y + 1);
 
     if (slot.terrain === 'high') {
-      ctx.fillStyle = '#8b7355';
-      ctx.font = '8px sans-serif';
-      ctx.fillText('▲고지', slot.x, slot.y + 32);
+      ctx.fillStyle = '#a9d5ff';
+      ctx.font = '700 8px sans-serif';
+      ctx.fillText('▲고지', slot.x, slot.y + 35);
     }
   });
 }
@@ -2760,13 +2904,16 @@ function drawTowers() {
     const pulse = 0.5 + Math.sin(state.gameTime * 4 + idx) * 0.5;
 
     ctx.beginPath();
-    ctx.ellipse(tower.x, tower.y + 18, 22, 9, 0, 0, Math.PI * 2);
-    ctx.fillStyle = 'rgba(0,0,0,0.28)';
+    ctx.ellipse(tower.x, tower.y + 30, 28, 10, 0, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(0,0,0,0.25)';
     ctx.fill();
 
+    const baseGlow = ctx.createRadialGradient(tower.x, tower.y + 8, 4, tower.x, tower.y + 8, 32);
+    baseGlow.addColorStop(0, `${hero.color}66`);
+    baseGlow.addColorStop(1, 'rgba(10, 12, 18, 0.95)');
     ctx.beginPath();
-    ctx.arc(tower.x, tower.y, 24, 0, Math.PI * 2);
-    ctx.fillStyle = tower.skillActive ? '#2a2a10' : '#1a1530';
+    ctx.arc(tower.x, tower.y + 8, 26, 0, Math.PI * 2);
+    ctx.fillStyle = tower.skillActive ? '#3a2d12' : baseGlow;
     ctx.fill();
     ctx.strokeStyle = isSelected ? '#ffd700' : hero.color;
     ctx.lineWidth = isSelected ? 3 : 2;
@@ -2782,7 +2929,7 @@ function drawTowers() {
 
     if (tower.skillActive) {
       ctx.beginPath();
-      ctx.arc(tower.x, tower.y, 30 + pulse * 2, 0, Math.PI * 2);
+      ctx.arc(tower.x, tower.y + 8, 32 + pulse * 2, 0, Math.PI * 2);
       ctx.strokeStyle = `rgba(255,215,0,${0.42 + pulse * 0.34})`;
       ctx.lineWidth = 2;
       ctx.stroke();
@@ -2791,12 +2938,24 @@ function drawTowers() {
     const bounce = Math.sin(state.gameTime * 3 + idx) * 2;
     const heroImage = images.heroes[tower.heroType];
     if (heroImage) {
-      const size = isSelected ? 66 : 60;
       ctx.save();
       ctx.shadowColor = hero.color;
-      ctx.shadowBlur = tower.skillActive ? 18 : 10;
-      ctx.drawImage(heroImage, tower.x - size / 2, tower.y - 40 + bounce, size, size);
+      ctx.shadowBlur = tower.skillActive ? 20 : 12;
+      roundedRectPath(tower.x - 23, tower.y - 52 + bounce, 46, 56, 14);
+      ctx.clip();
+      ctx.drawImage(heroImage, tower.x - 26, tower.y - 58 + bounce, 52, 60);
       ctx.restore();
+
+      ctx.strokeStyle = isSelected ? '#ffe4a5' : 'rgba(255,255,255,0.18)';
+      ctx.lineWidth = isSelected ? 2.4 : 1.5;
+      roundedRectPath(tower.x - 23, tower.y - 52 + bounce, 46, 56, 14);
+      ctx.stroke();
+      ctx.fillStyle = 'rgba(8, 10, 17, 0.68)';
+      roundedRectPath(tower.x - 13, tower.y + 2, 26, 11, 5);
+      ctx.fill();
+      ctx.fillStyle = '#f7dfaa';
+      ctx.font = '700 10px sans-serif';
+      ctx.fillText(hero.icon, tower.x, tower.y + 8);
     } else {
       drawPixelSprite(tower.x, tower.y - 2 + bounce, SPRITES[hero.sprite], 3.5);
     }
@@ -2805,7 +2964,7 @@ function drawTowers() {
       ctx.fillStyle = '#ffd700';
       ctx.font = '10px serif';
       ctx.textAlign = 'center';
-      ctx.fillText('★'.repeat(tower.level - 1), tower.x, tower.y + 32);
+      ctx.fillText('★'.repeat(tower.level - 1), tower.x, tower.y + 42);
     }
 
     if (isSelected && tower.level < 3) {
@@ -2855,8 +3014,11 @@ function drawEnemyTrails() {
   state.enemies.forEach(enemy => {
     if (!enemy.alive) return;
     enemy.trail.forEach(t => {
-      ctx.globalAlpha = t.alpha * 0.3;
-      drawPixelSprite(t.x, t.y, SPRITES[enemy.sprite], PIX * 0.8);
+      ctx.globalAlpha = t.alpha * 0.18;
+      ctx.beginPath();
+      ctx.ellipse(t.x, t.y + enemy.size * 0.35, enemy.size * 0.7, enemy.size * 0.35, 0, 0, Math.PI * 2);
+      ctx.fillStyle = enemy.color;
+      ctx.fill();
     });
   });
   ctx.globalAlpha = 1;
@@ -2899,10 +3061,21 @@ function drawEnemies() {
       ctx.stroke();
     }
 
-    const spriteData = SPRITES[enemy.sprite];
-    if (spriteData) {
-      const scale = enemy.type === 'boss' ? 4.5 : PIX;
-      drawPixelSprite(enemy.x, enemy.y + flyY, spriteData, scale);
+    const enemyImage = images.enemies[enemy.type];
+    if (enemyImage) {
+      const size = enemy.type === 'boss' ? 118 : enemy.type === 'ogre' ? 78 : enemy.type === 'bat' ? 54 : 62;
+      const lift = enemy.type === 'bat' ? 18 : enemy.type === 'boss' ? 34 : 20;
+      ctx.save();
+      ctx.shadowColor = enemy.elite ? '#ff8ac7' : enemy.color;
+      ctx.shadowBlur = enemy.type === 'boss' ? 22 : 14;
+      ctx.drawImage(enemyImage, enemy.x - size / 2, enemy.y + flyY - lift, size, size);
+      ctx.restore();
+    } else {
+      const spriteData = SPRITES[enemy.sprite];
+      if (spriteData) {
+        const scale = enemy.type === 'boss' ? 4.5 : PIX;
+        drawPixelSprite(enemy.x, enemy.y + flyY, spriteData, scale);
+      }
     }
 
     if (enemy.hitFlash > 0) {

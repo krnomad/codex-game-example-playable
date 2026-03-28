@@ -1,0 +1,32 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(128 168) rotate(90) scale(78)">
+      <stop stop-color="#7DFF9A" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#7DFF9A" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="cloak" x1="84" y1="118" x2="174" y2="212" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#31452B"/>
+      <stop offset="1" stop-color="#162117"/>
+    </linearGradient>
+  </defs>
+  <ellipse cx="128" cy="182" rx="72" ry="46" fill="url(#glow)"/>
+  <path d="M74 206L98 122H158L182 206H74Z" fill="url(#cloak)"/>
+  <path d="M95 114C95 89.1472 115.147 69 140 69C164.853 69 185 89.1472 185 114V118H95V114Z" fill="#2B3E25"/>
+  <path d="M64 112L144 58L189 106L160 122L64 112Z" fill="#51693C"/>
+  <path d="M108 84L84 52L138 62L108 84Z" fill="#6D8C53"/>
+  <path d="M150 90L185 66L176 112L150 90Z" fill="#6D8C53"/>
+  <path d="M102 116C102 96.1177 118.118 80 138 80C157.882 80 174 96.1177 174 116V126H102V116Z" fill="#8BD76C"/>
+  <path d="M111 121C111 102.775 125.775 88 144 88C162.225 88 177 102.775 177 121V127H111V121Z" fill="#5CA946"/>
+  <ellipse cx="128" cy="128" rx="40" ry="34" fill="#87CF60"/>
+  <ellipse cx="150" cy="127" rx="37" ry="32" fill="#65B349"/>
+  <path d="M111 137C116.833 145 124.333 149 133.5 149C142.667 149 150.833 144.833 158 136.5" stroke="#203118" stroke-width="6" stroke-linecap="round"/>
+  <ellipse cx="123" cy="119" rx="7" ry="9" fill="#FEF0B1"/>
+  <ellipse cx="154" cy="118" rx="7" ry="9" fill="#FEF0B1"/>
+  <circle cx="123" cy="121" r="3.5" fill="#A40E1A"/>
+  <circle cx="154" cy="120" r="3.5" fill="#A40E1A"/>
+  <path d="M104 143L118 135L118 151L104 143Z" fill="#F7E8BB"/>
+  <path d="M162 143L148 135L148 151L162 143Z" fill="#F7E8BB"/>
+  <path d="M155 130C154.333 133.5 151.8 137 146 140" stroke="#203118" stroke-width="4" stroke-linecap="round"/>
+  <path d="M78 174L92 148L108 166L78 174Z" fill="#BC7C2C"/>
+  <path d="M174 150L198 176L162 172L174 150Z" fill="#A95E2A"/>
+</svg>

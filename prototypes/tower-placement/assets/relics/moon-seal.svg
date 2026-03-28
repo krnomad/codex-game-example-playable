@@ -1,0 +1,29 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="42" y1="24" x2="214" y2="230" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0D1A35"/>
+      <stop offset="1" stop-color="#080913"/>
+    </linearGradient>
+    <linearGradient id="ring" x1="56" y1="34" x2="210" y2="220" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#A4E3FF"/>
+      <stop offset="1" stop-color="#7B74FF"/>
+    </linearGradient>
+    <radialGradient id="mist" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(128 116) rotate(90) scale(84)">
+      <stop stop-color="#D7F4FF" stop-opacity="0.4"/>
+      <stop offset="1" stop-color="#D7F4FF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="256" height="256" rx="38" fill="url(#bg)"/>
+  <circle cx="128" cy="128" r="92" stroke="url(#ring)" stroke-width="3.5" opacity="0.85"/>
+  <circle cx="128" cy="128" r="70" fill="url(#mist)"/>
+  <path d="M128 66L144.94 100.323L182.824 105.827L155.412 132.544L161.88 170.274L128 152.46L94.1201 170.274L100.588 132.544L73.1766 105.827L111.06 100.323L128 66Z" fill="#1D356B" stroke="#C2F0FF" stroke-width="3"/>
+  <circle cx="128" cy="128" r="28" stroke="#9EE8FF" stroke-width="4"/>
+  <path d="M128 90V166" stroke="#E4FDFF" stroke-width="4" stroke-linecap="round"/>
+  <path d="M90 128H166" stroke="#E4FDFF" stroke-width="4" stroke-linecap="round"/>
+  <path d="M100 100L156 156" stroke="#75C7FF" stroke-width="2.5" stroke-linecap="round" opacity="0.9"/>
+  <path d="M156 100L100 156" stroke="#75C7FF" stroke-width="2.5" stroke-linecap="round" opacity="0.9"/>
+  <path d="M171 69C160.547 74.1346 149.866 88.2936 154.196 109.692C158.183 129.397 175.546 138.958 189 139.5C178.873 145.97 163.186 150.475 146.863 144.425C123.242 135.67 111.4 109.842 120.414 86.7447C128.065 67.1414 145.871 56.2845 165.316 56C167.569 55.967 169.823 56.0662 172.067 56.2952C173.102 56.4008 173.972 57.0529 174.357 58.0196C174.742 58.9863 174.575 60.0861 173.927 60.8919C172.789 62.3082 171.812 63.7772 171 65.2831V69Z" fill="#DDF7FF" fill-opacity="0.92"/>
+  <circle cx="83" cy="74" r="4" fill="#D7F4FF"/>
+  <circle cx="185" cy="176" r="5" fill="#A4E3FF"/>
+  <circle cx="66" cy="164" r="3" fill="#8DA8FF"/>
+</svg>

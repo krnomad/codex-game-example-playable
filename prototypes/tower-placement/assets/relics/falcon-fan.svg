@@ -1,0 +1,30 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="38" y1="28" x2="220" y2="224" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#22160F"/>
+      <stop offset="1" stop-color="#0E0C12"/>
+    </linearGradient>
+    <linearGradient id="ring" x1="52" y1="30" x2="216" y2="226" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#EED3A1"/>
+      <stop offset="1" stop-color="#8A6538"/>
+    </linearGradient>
+    <linearGradient id="fan" x1="86" y1="72" x2="176" y2="188" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FAF2D4"/>
+      <stop offset="1" stop-color="#C8A977"/>
+    </linearGradient>
+  </defs>
+  <rect width="256" height="256" rx="38" fill="url(#bg)"/>
+  <circle cx="128" cy="128" r="92" stroke="url(#ring)" stroke-width="3.5" opacity="0.85"/>
+  <path d="M126 190C113.971 165.236 97.8196 143.511 78.6627 125.151C93.0067 116.385 110.046 109.912 128.64 106.757C148.756 103.345 167.89 104.65 184.44 109.386C176.164 131.152 160.44 151.351 138.713 166.423L126 190Z" fill="url(#fan)" stroke="#F2D9AC" stroke-width="3"/>
+  <path d="M128 108C120.908 95.4863 112.602 83.8428 103.224 73.0995C115.755 68.9906 129.106 67 142.478 67.2445C155.85 67.489 168.982 69.9626 181.356 74.5267C173.61 86.6008 164.687 97.8738 154.714 108.186L128 108Z" fill="#F8EDD0" stroke="#E4C98F" stroke-width="3"/>
+  <path d="M128 110C109.165 111.122 91.0504 116.917 75.4695 126.799C62.9797 134.721 52.1807 145.03 43.7202 157.126C54.118 165.321 66.128 171.372 78.9653 174.935C97.6551 180.123 117.358 179.644 135.778 173.557L128 110Z" fill="#E2C085" fill-opacity="0.94"/>
+  <path d="M128 108C145.741 111.452 162.389 119.432 176.407 131.287C187.636 140.785 196.437 152.83 202.071 166.407C190.086 171.79 177.136 175.057 163.879 176.051C144.569 177.497 125.329 174.361 107.519 166.891L128 108Z" fill="#D4A767" fill-opacity="0.92"/>
+  <path d="M126 188L135 212" stroke="#8B6130" stroke-width="7" stroke-linecap="round"/>
+  <path d="M129 110L132 170" stroke="#8B6130" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+  <path d="M112 112L111 165" stroke="#A98554" stroke-width="2" stroke-linecap="round" opacity="0.75"/>
+  <path d="M145 112L154 165" stroke="#A98554" stroke-width="2" stroke-linecap="round" opacity="0.75"/>
+  <path d="M98 117L90 157" stroke="#A98554" stroke-width="2" stroke-linecap="round" opacity="0.75"/>
+  <path d="M161 118L176 156" stroke="#A98554" stroke-width="2" stroke-linecap="round" opacity="0.75"/>
+  <path d="M72 86L95 98" stroke="#EED3A1" stroke-width="4" stroke-linecap="round" opacity="0.7"/>
+  <path d="M184 88L160 100" stroke="#EED3A1" stroke-width="4" stroke-linecap="round" opacity="0.7"/>
+</svg>

@@ -1,0 +1,76 @@
+<svg width="1920" height="1080" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="sky" x1="960" y1="0" x2="960" y2="1080" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#081421"/>
+      <stop offset="0.45" stop-color="#12324A"/>
+      <stop offset="1" stop-color="#22422F"/>
+    </linearGradient>
+    <linearGradient id="mist" x1="960" y1="540" x2="960" y2="1080" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#E1F0D0" stop-opacity="0"/>
+      <stop offset="1" stop-color="#D7EBC2" stop-opacity="0.22"/>
+    </linearGradient>
+    <radialGradient id="moonGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1380 182) rotate(90) scale(210 210)">
+      <stop stop-color="#FFF3C0"/>
+      <stop offset="0.55" stop-color="#E8D59B" stop-opacity="0.82"/>
+      <stop offset="1" stop-color="#E8D59B" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="mountainBack" x1="960" y1="280" x2="960" y2="750" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1F3554"/>
+      <stop offset="1" stop-color="#142235"/>
+    </linearGradient>
+    <linearGradient id="mountainMid" x1="960" y1="380" x2="960" y2="820" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#274B48"/>
+      <stop offset="1" stop-color="#183129"/>
+    </linearGradient>
+    <linearGradient id="ground" x1="960" y1="700" x2="960" y2="1080" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#30492D"/>
+      <stop offset="1" stop-color="#1B2614"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1920" height="1080" fill="url(#sky)"/>
+  <circle cx="1380" cy="182" r="92" fill="#F7E2A8"/>
+  <circle cx="1380" cy="182" r="210" fill="url(#moonGlow)"/>
+
+  <g opacity="0.65">
+    <path d="M-40 574L128 426L254 512L390 340L540 506L682 306L868 522L1020 350L1212 558L1422 320L1604 530L1776 408L1960 566V782H-40V574Z" fill="url(#mountainBack)"/>
+  </g>
+  <g opacity="0.82">
+    <path d="M-60 678L118 522L282 640L450 468L632 670L816 450L964 632L1132 470L1332 700L1508 512L1700 688L1862 564L1980 670V884H-60V678Z" fill="url(#mountainMid)"/>
+  </g>
+
+  <rect y="690" width="1920" height="390" fill="url(#ground)"/>
+
+  <g opacity="0.85">
+    <ellipse cx="960" cy="832" rx="700" ry="92" fill="#7BA06A" fill-opacity="0.18"/>
+    <ellipse cx="840" cy="900" rx="840" ry="110" fill="#A3BE7D" fill-opacity="0.08"/>
+  </g>
+
+  <g opacity="0.9">
+    <path d="M210 700H286L304 926H194L210 700Z" fill="#2C2119"/>
+    <path d="M164 746H330L314 784H180L164 746Z" fill="#A5412B"/>
+    <path d="M640 662H716L732 910H622L640 662Z" fill="#2C2119"/>
+    <path d="M592 708H758L740 748H610L592 708Z" fill="#A5412B"/>
+    <path d="M1522 666H1598L1614 914H1504L1522 666Z" fill="#2C2119"/>
+    <path d="M1472 712H1640L1622 752H1490L1472 712Z" fill="#A5412B"/>
+  </g>
+
+  <g opacity="0.96">
+    <path d="M984 584L1034 548L1082 584V746H984V584Z" fill="#513928"/>
+    <path d="M1034 522L1136 592H932L1034 522Z" fill="#C95539"/>
+    <rect x="1004" y="624" width="60" height="122" rx="4" fill="#7B533B"/>
+    <rect x="1024" y="654" width="20" height="92" fill="#E3CBA5" fill-opacity="0.65"/>
+    <path d="M926 756H1142V778H926V756Z" fill="#2C2119"/>
+  </g>
+
+  <g opacity="0.58">
+    <path d="M124 814C256 768 428 760 636 792C886 830 1044 824 1308 778C1520 740 1696 748 1842 808V1080H124V814Z" fill="#203220"/>
+  </g>
+  <rect width="1920" height="1080" fill="url(#mist)"/>
+  <g opacity="0.48" fill="#D9E8D1">
+    <ellipse cx="302" cy="870" rx="164" ry="36"/>
+    <ellipse cx="672" cy="826" rx="230" ry="44"/>
+    <ellipse cx="1182" cy="862" rx="248" ry="40"/>
+    <ellipse cx="1620" cy="836" rx="204" ry="34"/>
+  </g>
+</svg>

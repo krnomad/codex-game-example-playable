@@ -1,0 +1,29 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="34" y1="24" x2="220" y2="230" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#271717"/>
+      <stop offset="1" stop-color="#0E0B12"/>
+    </linearGradient>
+    <linearGradient id="ring" x1="48" y1="30" x2="214" y2="220" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFE9A0"/>
+      <stop offset="1" stop-color="#C1783B"/>
+    </linearGradient>
+    <linearGradient id="coin" x1="80" y1="74" x2="174" y2="176" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF3B0"/>
+      <stop offset="1" stop-color="#C9893E"/>
+    </linearGradient>
+    <linearGradient id="ribbon" x1="109" y1="136" x2="148" y2="224" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#9A2941"/>
+      <stop offset="1" stop-color="#3A0F22"/>
+    </linearGradient>
+  </defs>
+  <rect width="256" height="256" rx="38" fill="url(#bg)"/>
+  <circle cx="128" cy="128" r="92" stroke="url(#ring)" stroke-width="3.5" opacity="0.85"/>
+  <path d="M107 136H128H149V218C149 220.582 145.994 221.994 144.009 220.345L128 207.047L111.991 220.345C110.006 221.994 107 220.582 107 218V136Z" fill="url(#ribbon)"/>
+  <circle cx="128" cy="112" r="48" fill="url(#coin)" stroke="#F8E5A7" stroke-width="4"/>
+  <circle cx="128" cy="112" r="34" stroke="#B77431" stroke-width="2.5" opacity="0.8"/>
+  <path d="M128 85L136.09 101.393L154.181 104.021L141.09 116.785L144.18 134.807L128 126.299L111.82 134.807L114.91 116.785L101.819 104.021L119.91 101.393L128 85Z" fill="#7C3F18"/>
+  <path d="M92 70L107 92" stroke="#F7D38E" stroke-width="5" stroke-linecap="round" opacity="0.7"/>
+  <path d="M164 70L149 92" stroke="#F7D38E" stroke-width="5" stroke-linecap="round" opacity="0.7"/>
+  <path d="M79 120C91.5 135.5 111.5 145 128 145C144.5 145 164.5 135.5 177 120" stroke="#FFDFA0" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+</svg>

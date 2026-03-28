@@ -1,0 +1,24 @@
+<svg width="320" height="320" viewBox="0 0 320 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="34" y1="18" x2="284" y2="308" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#5A2C24"/>
+      <stop offset=".55" stop-color="#2A1620"/>
+      <stop offset="1" stop-color="#110D17"/>
+    </linearGradient>
+    <radialGradient id="sun" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(160 98) rotate(90) scale(132 138)">
+      <stop stop-color="#FFD7B4" stop-opacity=".72"/>
+      <stop offset="1" stop-color="#FFD7B4" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="320" height="320" rx="36" fill="url(#bg)"/>
+  <rect x="18" y="18" width="284" height="284" rx="28" stroke="#E2AB7D" stroke-opacity=".3" stroke-width="2"/>
+  <circle cx="160" cy="100" r="92" fill="url(#sun)"/>
+  <path d="M112 116C112 89.49 133.49 68 160 68C186.51 68 208 89.49 208 116C208 142.51 186.51 164 160 164C133.49 164 112 142.51 112 116Z" fill="#F0D8CB"/>
+  <path d="M136 112C136 106.477 140.477 102 146 102H174C179.523 102 184 106.477 184 112V126C184 131.523 179.523 136 174 136H146C140.477 136 136 131.523 136 126V112Z" fill="#402030"/>
+  <path d="M122 86C133.233 73.8735 170.153 71.9884 196 86L196 66C179.958 55.0383 143.63 55.7761 120 72V86Z" fill="#613447"/>
+  <path d="M104 210C116.585 181.365 144.444 166 174 166C203.925 166 229.465 181.539 244 210L224 256H94L104 210Z" fill="#77415F"/>
+  <path d="M132 176L160 156L188 176L178 250H142L132 176Z" fill="#C27E6A"/>
+  <path d="M78 232C116 214 132 190 160 166C188 190 204 214 242 232" stroke="#F1C79A" stroke-opacity=".92" stroke-width="8" stroke-linecap="round"/>
+  <path d="M160 52L170 84L204 84L176 104L186 136L160 116L134 136L144 104L116 84L150 84L160 52Z" fill="#FFF1D5" fill-opacity=".2"/>
+  <path d="M120 220H200" stroke="#FFE0B5" stroke-opacity=".7" stroke-width="6" stroke-linecap="round"/>
+</svg>
